@@ -11,7 +11,7 @@ type PropsType = {
     title: string
     tasks: Array<TaskType>
     removeTasks: (name:number)=>void
-    filterTasks: (filter:FilterType)=>void
+    filterTasks: (filterName:FilterType)=>void
 }
 
 export function Todolist(props: PropsType) {

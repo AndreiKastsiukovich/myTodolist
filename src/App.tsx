@@ -19,18 +19,22 @@ function App() {
         SetTasks(deletedTasks)
     }
 
-    let[filter,SetFilter] = useState<FilterType>('All')
+    let[filterName,SetFilterName] = useState('All')
 
-    const filterTasks = (filter:FilterType) => {
-        SetFilter(filter)
+    const filterTasks = (filterName:FilterType) => {
+        SetFilterName(filterName)
     }
 
     let filteringTasks = tasks1
-    if (filter === 'Active'){
-        filteringTasks = tasks1.filter((el)=>el.isDone)
+
+    if(filterName === 'All'){
+        filteringTasks = tasks1
     }
-    if (filter === 'Completed'){
-        filteringTasks = tasks1.filter((el)=>!el.isDone)
+    if(filterName === 'Completed'){
+        filteringTasks = tasks1.filter((el)=>el.isDone === true)
+    }
+    if(filterName === 'Active'){
+        filteringTasks = tasks1.filter((el)=>el.isDone === false)
     }
 
 
