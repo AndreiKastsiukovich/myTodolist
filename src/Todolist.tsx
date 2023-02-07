@@ -1,7 +1,7 @@
 import React from 'react';
-import {NameType} from "./App";
+import {FilterType} from "./App";
 
-type TaskType = {
+export type TaskType = {
     id: number
     title: string
     isDone: boolean
@@ -10,9 +10,8 @@ type TaskType = {
 type PropsType = {
     title: string
     tasks: Array<TaskType>
-    removeTasks:(id:number)=>void
-    filterTasks:(name:NameType)=>void
-
+    removeTasks: (name:number)=>void
+    filterTasks: (filter:FilterType)=>void
 }
 
 export function Todolist(props: PropsType) {
@@ -23,7 +22,7 @@ export function Todolist(props: PropsType) {
             <button>+</button>
         </div>
         <ul>
-            {props.tasks.map((el) => {
+            {props.tasks.map((el)=>{
                 return (
                     <li key={el.id}>
                         <button onClick={()=>{props.removeTasks(el.id)}}> X </button>
@@ -32,7 +31,6 @@ export function Todolist(props: PropsType) {
                     </li>
                 )
             })}
-
         </ul>
         <div>
             <button onClick={()=>{props.filterTasks('All')}}>All</button>
