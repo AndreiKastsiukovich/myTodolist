@@ -28,6 +28,25 @@ export function Todolist(props: PropsType) {
         props.filterTasks('Completed')
     }
 
+    const removeTaskMap = props.tasks.map((el)=>{
+
+        const deletedTasks = () => {
+            props.removeTasks(el.id)
+        }
+
+        return(
+
+            <li>
+                <button onClick={deletedTasks}> X </button>
+
+                <input type="checkbox" checked={el.isDone}/>
+
+                <span>{el.title}</span>
+            </li>
+        )
+    })
+
+
     return <div>
         <h3>{props.title}</h3>
         <div>
@@ -35,23 +54,7 @@ export function Todolist(props: PropsType) {
             <button>+</button>
         </div>
         <ul>
-            {props.tasks.map((el)=>{
-
-                const deletedTasks = () => {
-                    props.removeTasks(el.id)
-                }
-
-                return(
-
-                    <li>
-                        <button onClick={deletedTasks}> X </button>
-
-                        <input type="checkbox" checked={el.isDone}/>
-
-                        <span>{el.title}</span>
-                    </li>
-                )
-            })}
+            {removeTaskMap}
         </ul>
         <div>
             <button onClick={onClickAll}>All</button>
