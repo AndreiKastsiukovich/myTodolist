@@ -13,6 +13,12 @@ function App() {
         { id: 4, title: "Redux", isDone: false }
     ])
 
+
+    const addTask = (title:string) => {
+        let newTask = { id: 1, title: title, isDone: true }
+        SetTasks([...tasks1,newTask])
+    }
+
     const removeTasks = (id:number) => {
         let removedTasks = tasks1.filter((el)=>el.id !== id)
         SetTasks(removedTasks)
@@ -44,6 +50,7 @@ function App() {
                     tasks={filteredTasks}
                     removeTasks={removeTasks}
                     filterTasks={filterTasks}
+                    addTaskFunction={addTask}
 
                     />
             </div>

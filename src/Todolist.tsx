@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {ButtonNameType} from "./App";
 
 export type TaskType = {
@@ -12,20 +12,25 @@ type PropsType = {
     tasks: TaskType[]
     removeTasks: (id:number)=>void
     filterTasks: (buttonName:ButtonNameType)=>void
+    addTaskFunction:(title:string)=>void
 }
 
 export function Todolist(props: PropsType) {
 
-    const onClickAll = () => {
-        props.filterTasks('All')
+
+    const onClickHandlerName = (buttonName:ButtonNameType) => {
+        props.filterTasks(buttonName)
     }
 
-    const onClickActive = () => {
-        props.filterTasks('Active')
+    const[title,SetTitle] = useState('')
+
+    const onChangeHandler = (event:ChangeEvent<HTMLInputElement>) => {
+        SetTitle(event.currentTarget.value)
     }
 
-    const onClickCompleted = () => {
-        props.filterTasks('Completed')
+    const onClickHandler = () => {
+        props.addTaskFunction(title)
+        SetTitle('')
     }
 
     const removeTaskMap = props.tasks.map((el)=>{
@@ -38,9 +43,7 @@ export function Todolist(props: PropsType) {
 
             <li>
                 <button onClick={deletedTasks}> X </button>
-
                 <input type="checkbox" checked={el.isDone}/>
-
                 <span>{el.title}</span>
             </li>
         )
@@ -50,16 +53,18 @@ export function Todolist(props: PropsType) {
     return <div>
         <h3>{props.title}</h3>
         <div>
-            <input/>
-            <button>+</button>
+
+            <input value={title} onChange={onChangeHandler}/>
+            <button onClick={onClickHandler}>+</button>
+
         </div>
         <ul>
             {removeTaskMap}
         </ul>
         <div>
-            <button onClick={onClickAll}>All</button>
-            <button onClick={onClickActive}>Active</button>
-            <button onClick={onClickCompleted}>Completed</button>
+            <button onClick={()=>onClickHandlerName('All')}>All</button>
+            <button onClick={()=>onClickHandlerName('Active')}>Active</button>
+            <button onClick={()=>onClickHandlerName('Completed')}>Completed</button>
         </div>
     </div>
 }
