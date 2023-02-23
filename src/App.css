@@ -6,6 +6,7 @@
 .App > div {
   margin-right: 50px;
 }
+
 .task {
   font-weight: bold;
 }
@@ -23,10 +24,10 @@
 
 }
 
-.active-filter1 {
+.default-filter {
   background-color: dodgerblue;
   font-weight: bold;
-  color:snow;
+  color:white;
   border-radius: 3px;
 
 }
@@ -34,6 +35,10 @@
 .filter-btn-container {
   display: flex;
   justify-content: space-between;
+}
+
+.input-text-error{
+  color: red;
 }
 
 .input-error {
