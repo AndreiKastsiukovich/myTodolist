@@ -1,3 +1,4 @@
+
 .App {
   padding: 30px;
   display: flex;
@@ -7,41 +8,19 @@
   margin-right: 50px;
 }
 
-.task {
-  font-weight: bold;
+.error {
+  border: red 1px solid;
 }
 
-.task-done {
-  text-decoration: line-through;
-  opacity: 0.5;
-}
-
-.active-filter {
-  background-color: hotpink;
-  font-weight: bold;
-  color:white;
-  border-radius: 3px;
-
-}
-
-.default-filter {
-  background-color: dodgerblue;
-  font-weight: bold;
-  color:white;
-  border-radius: 3px;
-
-}
-
-.filter-btn-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.input-text-error{
+.error-message {
   color: red;
 }
 
-.input-error {
-  border:2px solid hotpink;
-  outline: none;
+.active-filter {
+  background-color: aquamarine;
 }
+
+.is-done {
+  opacity: 0.5;
+}
+
