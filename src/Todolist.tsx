@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {FilterValuesType} from './App';
 import {ButtonInput} from "./ButtonInput";
+import {EditModeForm} from "./EditModeForm";
 
 export type TaskType = {
     id: string
@@ -18,6 +19,8 @@ type PropsType = {
     changeTaskStatus: (taskId: string, isDone: boolean,todoID:string) => void
     filter: FilterValuesType
     deleteTodolist: (todoID:string)=>void
+    changeSpanInput:(taskId: string, newTitle:string,todoID:string) => void
+    changeTitleTodo:(newTitle:string,todoID:string) => void
 }
 
 export function Todolist(props: PropsType) {
@@ -28,21 +31,30 @@ export function Todolist(props: PropsType) {
     const onAllClickHandler = () => props.changeFilter("all",props.todoID);
     const onActiveClickHandler = () => props.changeFilter("active",props.todoID);
     const onCompletedClickHandler = () => props.changeFilter("completed",props.todoID);
-
     const addTasks = (title:string) => {
         props.addTask(title,props.todoID)
+    }
+    const changeTodoTitle = (newTitle:string) => {
+        props.changeTitleTodo(newTitle,props.todoID)
     }
 
     return <div>
 
         <button onClick={onClickDelTodolistHandler}> Del </button>
-        <h3>{props.title}</h3>
+        <h3>
+            <EditModeForm title={props.title} callBack={changeTodoTitle}/>
+        </h3>
 
-        <ButtonInput buttonName={'ADD'} callBack={addTasks}/>
+        <ButtonInput buttonName={'Add Task'} callBack={addTasks}/>
 
         <ul>
             {
                 props.state.map(t => {
+
+                    const changeSpan = (newTitle:string) => {
+                        props.changeSpanInput(t.id,newTitle,props.todoID)
+                    }
+
                     const onClickHandler = () => props.removeTask(t.id,props.todoID)
 
                     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +65,9 @@ export function Todolist(props: PropsType) {
                         <input type="checkbox"
                                onChange={onChangeHandler}
                                checked={t.isDone}/>
-                        <span>{t.title}</span>
+
+                        <EditModeForm title={t.title} callBack={changeSpan}/>
+
                         <button onClick={onClickHandler}>x</button>
                     </li>
                 })
