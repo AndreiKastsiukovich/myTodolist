@@ -29,13 +29,14 @@ function App() {
     let [state, setState] = useState<StateType>({
         [todoListId1]:[
             {id:v1(),title:'Karelia',isDone:false},
-            {id:v1(),title:'Murmansk',isDone:false},
+            {id:v1(),title:'Murmansk',isDone:true},
             {id:v1(),title:'Altay',isDone:false},
+            {id:v1(),title:'Georgia',isDone:true},
         ],
 
         [todoListId2]:[
             {id:v1(),title:'Bread',isDone:false},
-            {id:v1(),title:'Water',isDone:false},
+            {id:v1(),title:'Water',isDone:true},
             {id:v1(),title:'Potato',isDone:false},
         ],
     })

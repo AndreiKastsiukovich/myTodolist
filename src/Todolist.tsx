@@ -47,32 +47,39 @@ export function Todolist(props: PropsType) {
 
         <ButtonInput buttonName={'Add Task'} callBack={addTasks}/>
 
-        <ul>
-            {
-                props.state.map(t => {
 
-                    const changeSpan = (newTitle:string) => {
-                        props.changeSpanInput(t.id,newTitle,props.todoID)
-                    }
+        {props.state.length ?
 
-                    const onClickHandler = () => props.removeTask(t.id,props.todoID)
+            <ul>
+                {
+                    props.state.map(t => {
 
-                    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                        props.changeTaskStatus(t.id, e.currentTarget.checked,props.todoID);
-                    }
+                        const changeSpan = (newTitle: string) => {
+                            props.changeSpanInput(t.id, newTitle, props.todoID)
+                        }
 
-                    return <li key={t.id} className={t.isDone ? "is-done" : ""}>
-                        <input type="checkbox"
-                               onChange={onChangeHandler}
-                               checked={t.isDone}/>
+                        const onClickHandler = () => props.removeTask(t.id, props.todoID)
 
-                        <EditModeForm title={t.title} callBack={changeSpan}/>
+                        const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+                            props.changeTaskStatus(t.id, e.currentTarget.checked, props.todoID);
+                        }
 
-                        <button onClick={onClickHandler}>x</button>
-                    </li>
-                })
-            }
-        </ul>
+                        return <li key={t.id} className={t.isDone ? "is-done" : ""}>
+                            <input type="checkbox"
+                                   onChange={onChangeHandler}
+                                   checked={t.isDone}/>
+
+                            <EditModeForm title={t.title} callBack={changeSpan}/>
+
+                            <button onClick={onClickHandler}>x</button>
+                        </li>
+                    })
+                }
+            </ul>
+
+            : <span> Your tasklist is empty </span>}
+
+
         <div>
             <button className={props.filter === 'all' ? "active-filter" : ""}
                     onClick={onAllClickHandler}>All</button>
